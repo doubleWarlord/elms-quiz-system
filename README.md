@@ -1,39 +1,91 @@
-# ELMS - E-Learning Management System
-## Quiz Module with Multimedia Support
+# ELMS Quiz System
 
-A comprehensive E-Learning Management System built with **Laravel**, **MySQL**, and **Vue.js**, focused on interactive quiz creation with multimedia content and mandatory question completion.
+An E-Learning Management System (ELMS) with quiz functionality built with Laravel and Vue.js
 
-### 🎯 Key Features
+## Features
 
-- **Multimedia Question Support**
-  - Paragraph/Text content
-  - Video integration (YouTube, MP4)
-  - Image/Picture inclusion (JPG, PNG, GIF)
-  - Mixed media in single question
+✅ **User Management**
+- Student and Teacher roles
+- Secure authentication with Sanctum tokens
+- Profile management
 
-- **Mandatory Question Completion**
-  - Students cannot skip questions
-  - Must answer correctly to proceed
-  - Unlimited attempts (configurable)
-  - Real-time feedback on wrong/correct answers
+✅ **Quiz Creation & Management**
+- Create unlimited quizzes with multimedia support
+- Configure pass percentage and attempt limits
+- Publish/unpublish quizzes
+- Organize questions with proper ordering
 
-- **Quiz Management**
-  - Create and manage quizzes
-  - Define question types and multimedia content
-  - Set passing criteria
-  - Track student progress
+✅ **Question Management**
+- Multiple question types (Multiple Choice, True/False, Short Answer)
+- Add media (images, videos, documents, text)
+- Include explanations for answers
+- Flexible question ordering
 
-### 🛠 Tech Stack
+✅ **Quiz Taking**
+- Interactive quiz interface with progress tracking
+- Real-time feedback on answers
+- Media display in questions
+- Configurable pass percentage
 
-- **Backend**: Laravel 11
-- **Database**: MySQL 8.0+
-- **Frontend**: Vue.js 3 / Bootstrap 5
-- **Storage**: Local/S3 for media files
-- **Authentication**: Laravel Sanctum
+✅ **Results & Analytics**
+- Detailed score calculations
+- Pass/fail determination
+- View explanations after completion
+- Attempt history
 
-### 🚀 Quick Start
+✅ **Technical Features**
+- RESTful API
+- Real-time authentication
+- Docker containerization
+- Responsive design with Bootstrap 5
+- Vue 3 Composition API
+
+## Tech Stack
+
+### Backend
+- Laravel 11.x
+- Laravel Sanctum (API authentication)
+- MySQL 8.0
+- PHP 8.2+
+
+### Frontend
+- Vue.js 3.x
+- Vue Router 4.x
+- Axios
+- Bootstrap 5
+- Vite
+
+## Quick Start
+
+### Using Docker
 
 ```bash
+# Clone repository
+git clone https://github.com/doubleWarlord/elms-quiz-system.git
+cd elms-quiz-system
+
+# Start containers
+docker-compose up -d
+
+# Install dependencies
+docker exec elms_app composer install
+docker exec elms_node npm install
+
+# Setup environment and database
+docker exec elms_app php artisan migrate
+
+# Access application
+# Frontend: http://localhost:5173
+# API: http://localhost:8000/api
+```
+
+### Local Setup
+
+```bash
+# Clone repository
+git clone https://github.com/doubleWarlord/elms-quiz-system.git
+cd elms-quiz-system
+
 # Install dependencies
 composer install
 npm install
@@ -42,37 +94,78 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
-# Database setup
-php artisan migrate --seed
+# Database setup (update .env first)
+php artisan migrate
 
-# Run server
+# Start servers
+# Terminal 1
 php artisan serve
+
+# Terminal 2
 npm run dev
 ```
 
-### 📚 Key Components
+## Project Structure
 
-- **Users**: Student and teacher accounts
-- **Quizzes**: Quiz configuration
-- **Questions**: Questions with multimedia
-- **StudentProgress**: Tracking quiz completion
-- **Multimedia Storage**: Videos, images, documents
+```
+elms-quiz-system/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   └── Api/
+│   │   └── Middleware/
+│   ├── Models/
+│   └── Policies/
+├── database/
+│   └── migrations/
+├── resources/
+│   └── js/
+│       ├── router/
+│       ├── views/
+│       └── app.js
+├── routes/
+│   └── api.php
+├── docker-compose.yml
+├── Dockerfile
+├── vite.config.js
+├── package.json
+└── composer.json
+```
 
-### 🔌 API Endpoints
+## API Endpoints
 
-**Authentication**
-- `POST /api/auth/register`
-- `POST /api/auth/login`
+### Authentication
+- `POST /api/auth/register` - Register user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout
+- `GET /api/auth/profile` - Get profile
 
-**Quizzes**
-- `GET /api/quizzes`
-- `POST /api/quizzes` (Teacher)
-- `GET /api/quizzes/{id}`
+### Quizzes
+- `GET /api/quizzes` - List quizzes
+- `POST /api/quizzes` - Create quiz
+- `GET /api/quizzes/{id}` - Get quiz
+- `PUT /api/quizzes/{id}` - Update quiz
+- `DELETE /api/quizzes/{id}` - Delete quiz
 
-**Questions**
-- `GET /api/quizzes/{id}/questions`
-- `POST /api/quizzes/{id}/submit-answer`
+### Student Quiz
+- `POST /api/quizzes/{id}/start` - Start quiz
+- `GET /api/quizzes/{id}/current-question` - Get question
+- `POST /api/quizzes/{id}/submit-answer` - Submit answer
+- `GET /api/quizzes/{id}/results` - Get results
 
-### 📝 License
+## Documentation
 
-MIT
+- [Setup Guide](./SETUP.md) - Detailed installation and configuration
+- [Contributing](./CONTRIBUTING.md) - Contribution guidelines
+
+## License
+
+MIT License - See [LICENSE](LICENSE) file
+
+## Author
+
+Muhammad Asyraf (@doubleWarlord)
+
+## Support
+
+For issues and feature requests, please open an issue on GitHub.
