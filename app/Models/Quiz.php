@@ -15,10 +15,19 @@ class Quiz extends Model
         'pass_percentage',
         'attempts_allowed',
         'is_published',
+        'pass_notification_enabled',
+        'pass_notification_cc_email',
+        'certificate_enabled',
+        'certificate_template_title',
+        'certificate_template_body',
+        'certificate_template_footer',
+        'certificate_logo_path',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+        'pass_notification_enabled' => 'boolean',
+        'certificate_enabled' => 'boolean',
     ];
 
     public function creator(): BelongsTo

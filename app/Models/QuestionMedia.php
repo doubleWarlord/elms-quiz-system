@@ -13,7 +13,15 @@ class QuestionMedia extends Model
         'media_path',
         'media_url',
         'description',
+        'requires_completion',
+        'player_layout',
+        'player_caption',
+        'poster_path',
         'order',
+    ];
+
+    protected $casts = [
+        'requires_completion' => 'boolean',
     ];
 
     public function question(): BelongsTo

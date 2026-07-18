@@ -1,0 +1,17 @@
+[mysqld]
+# Development-focused MySQL tuning
+skip-name-resolve = 1
+performance_schema = OFF
+
+# I/O durability tradeoff for faster local writes (acceptable for dev)
+innodb_flush_log_at_trx_commit = 2
+sync_binlog = 0
+
+# Memory and temp table tuning
+innodb_buffer_pool_size = 256M
+tmp_table_size = 64M
+max_heap_table_size = 64M
+
+# Connection and table cache
+max_connections = 100
+table_open_cache = 512
