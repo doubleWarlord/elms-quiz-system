@@ -158,6 +158,35 @@ elms-quiz-system/
 - [Setup Guide](./SETUP.md) - Detailed installation and configuration
 - [Contributing](./CONTRIBUTING.md) - Contribution guidelines
 
+## CI/CD
+
+This project now includes a GitHub Actions workflow at `.github/workflows/ci-cd.yml`.
+
+### CI (on pull requests and pushes to `main`)
+- Installs PHP 8.2 and Node 20
+- Installs Composer and NPM dependencies
+- Creates `.env` and app key
+- Runs database migrations against a MySQL service container
+- Runs backend tests with `php artisan test`
+- Builds frontend assets with `npm run build`
+
+### CD (on push to `main`)
+- Connects to your server through SSH
+- Pulls latest code
+- Rebuilds and starts Docker services
+- Runs production Composer install
+- Runs migrations and Laravel caches
+- Builds frontend assets
+
+### Required GitHub repository secrets
+- `DEPLOY_HOST` (example: `203.0.113.10`)
+- `DEPLOY_PORT` (example: `22`)
+- `DEPLOY_USER` (server SSH user)
+- `DEPLOY_SSH_KEY` (private key content)
+- `DEPLOY_PATH` (absolute path to project on server)
+
+Make sure your target server already has Docker and Docker Compose installed, and that the repository is available at `DEPLOY_PATH`.
+
 ## License
 
 MIT License - See [LICENSE](LICENSE) file
